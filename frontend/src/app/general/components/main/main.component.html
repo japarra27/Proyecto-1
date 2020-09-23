@@ -1,0 +1,74 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <mat-toolbar >
+      <i
+        class="fa fa-user-circle font-toolbar"
+        aria-hidden="true"
+      ></i>
+
+      <p class="userCard">Usuario</p>
+    </mat-toolbar>
+    <hr />
+
+    <mat-nav-list class="sidebar-menu">
+
+
+      <app-menu-list-items
+
+        *ngFor="let item of navItems"
+        [item]="item"
+      ></app-menu-list-items>
+    </mat-nav-list>
+  </mat-sidenav> -->
+  <mat-sidenav-content>
+    <mat-toolbar
+   color="primary" >
+      <!-- <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+
+        <mat-icon
+          class="mat-icon-singOut"
+          fontSet="fas"
+          fontIcon="fa-bars"
+        ></mat-icon>
+      </button> -->
+      <span class="titulo-rut-gas">Design Match</span>
+      <br>
+      <mat-chip-list aria-label="Fish selection" style="margin-left: 10px;">
+        <mat-chip routerLink="/proyecto">Proyectos</mat-chip>
+        <mat-chip routerLink="/disenio">Diseños</mat-chip>
+      </mat-chip-list>
+      <span class="example-spacer"></span>
+
+
+
+
+      <button
+        mat-icon-button
+        aria-label="Example icon-button with share icon"
+        (click)="cerrarSession()"
+      >
+        <mat-icon
+          class="mat-icon-singOut"
+          fontSet="fas"
+          fontIcon="fa-sign-out-alt"
+        ></mat-icon>
+      </button>
+    </mat-toolbar>
+
+    <ng-content> </ng-content>
+
+    <!-- Add Content Here -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

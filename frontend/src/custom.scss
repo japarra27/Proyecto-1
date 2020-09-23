@@ -1,0 +1,35 @@
+@import "~@angular/material/theming";
+@font-face {
+    font-family: Arial, Helvetica, sans-serif, 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    src: url('./assets/fonts/HelveticaLTStd-Roman.otf');
+}
+
+//Modificar botones
+// $button:mat-typography-level (font-size,
+// altura de la linea,
+// font-weigth) //Modificar H1
+//  $button:mat-typography-level (font-size,
+// altura de la linea,
+// font-weigth)
+$custom-typography:mat-typography-config( $font-family:"Helvetica",
+$button:mat-typography-level(10px, 30px, 300),
+$headline:mat-typography-level(40px, 46px, 500),
+$subheading-2:mat-typography-level(22px, 50px, 400));
+@include mat-core($custom-typography);
+// En este enlace se encontrara la paleta de comandos escencial para trabjar
+// con angular material https://material.io/design/color/
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent: mat-palette($mat-green,
+900);
+// The warn palette is optional (defaults to red).
+$candy-app-warn: mat-palette($mat-red,
+600);
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as `color` or `typography`.
+$candy-app-theme: mat-light-theme( ( color: ( primary: $candy-app-primary, accent: $candy-app-accent, warn: $candy-app-warn, ), ));
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($candy-app-theme);

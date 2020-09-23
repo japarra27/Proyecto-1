@@ -1,0 +1,17 @@
+<div class="container">
+
+    <mat-card-title class="titulo-dialog">{{titulo}}</mat-card-title>
+    <br>
+    <mat-dialog-content>
+
+        <mat-label>
+            ¿ Desea eliminar el diseño:
+        </mat-label>
+        <p>{{this.disenioSeleccionado.designer_first_name}} {{this.disenioSeleccionado.designer_last_name}} ?</p>
+    </mat-dialog-content>
+
+    <mat-dialog-actions class="actions-update">
+        <button mat-button mat-dialog-close>Cerrar</button>
+        <button mat-button [mat-dialog-close]="1" (click)="borrarDisenio()">Continuar</button>
+    </mat-dialog-actions>
+</div>

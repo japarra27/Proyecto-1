@@ -1,0 +1,151 @@
+<div class="container">
+  <h2
+    mat-dialog-title
+    style="display: flex; justify-content: center; font-weight: 200"
+  >
+    {{ description }}
+  </h2>
+
+  <mat-dialog-content autocomplete="off" class="mat-container-update">
+    <!-- <div> -->
+    <form [formGroup]="formDisenio" (ngSubmit)="crearNuevoDisenio()">
+      <div
+        class="form"
+        [formGroup]="formDisenio"
+        (ngSubmit)="crearNuevoDisenio()"
+      >
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input
+            matInput
+            class="form-control"
+            id="name"
+            name="name"
+            #name
+            formControlName="name"
+            required
+          />
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('name').errors?.required"
+          >
+            Campo obligatorio
+          </mat-error>
+          <small *ngIf=""></small>
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Apellido</mat-label>
+          <input
+            matInput
+            class="form-control"
+            id="lastName"
+            name="lastName"
+            #name
+            formControlName="lastName"
+            required
+          />
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('lastName').errors?.required"
+          >
+            Campo obligatorio
+          </mat-error>
+          <small *ngIf=""></small>
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            matInput
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            #email
+            formControlName="email"
+            required
+          />
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('email').errors?.required"
+          >
+            Campo obligatorio
+          </mat-error>
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('email').errors?.email"
+          >
+            Formato invalido
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="form">
+        <mat-form-field color="accent" appearance="outline">
+          <mat-label>Precio</mat-label>
+          <input
+            matInput
+            class="form-control"
+            type="text"
+            maxlength="10"
+            minlength="4"
+            formControlName="price"
+            id="price"
+            name="price"
+            required
+          />
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('price').errors?.required"
+          >
+            Campo obligatorio
+          </mat-error>
+          <mat-error
+            style="color: red"
+            *ngIf="formDisenio.get('price').errors?.pattern"
+          >
+            Porfavor ingrese valores numericos</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="form">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Archivo</mat-label>
+          <ngx-mat-file-input
+            formControlName="file"
+            placeholder="Basic outline placeholder"
+            [accept]="['.jpeg','.png','.jpg' ]"
+          ></ngx-mat-file-input>
+          <mat-icon matSuffix>folder</mat-icon>
+          <mat-error *ngIf="formDisenio.get('file').errors?.required">
+            Por favor seleccione un archivo
+          </mat-error>
+          <mat-error *ngIf="formDisenio.get('file').errors?.maxContentSize">
+            The total size must not exceed
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <button
+        mat-raised-button
+        color="primary"
+        cdkFocusInitial
+        [disabled]="!formDisenio.valid"
+      >
+        Guardar
+      </button>
+      <td mat-dialog-actions class="botonCerrar">
+        <button
+          mat-raised-button
+          color="warn"
+          mat-dialog-close
+          (click)="cerrar()"
+        >
+          Cerrar
+        </button>
+      </td>
+    </form>
+  </mat-dialog-content>
+</div>
