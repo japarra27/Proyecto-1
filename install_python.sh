@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # clone the project
-# git clone https://github.com/Jesus-2129/Proyecto-1.git
+# git clone https://github.com/japarra27/Proyecto-1.git
 
 # install packages
 sudo apt-get -y update
@@ -20,7 +20,11 @@ sudo apt-get install redis-server
 sudo service redis-server start
 
 # install frontapp
-sudo npm install
+sudo apt-get install -y python-software-properties
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash –
+sudo apt install -y nodejs
+sudo apt install -y npm
+sudo apt install -y build-essential
 
 # move folders
 # sudo mv Proyecto-1/ ~

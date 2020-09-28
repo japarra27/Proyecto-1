@@ -27,7 +27,7 @@ resource "google_compute_instance" "apps" {
     }
   }
 
-  metadata_startup_script = file("../install_python.sh")
+  # metadata_startup_script = file("../install_python.sh")
 
   network_interface {
     network = "default"
@@ -71,13 +71,9 @@ resource "google_compute_firewall" "https-server" {
   target_tags   = ["https-server"]
 }
 
-output "ip" {
-  value = "${google_compute_instance.apps.0.network_interface.0.access_config.0.nat_ip}"
-}
-
 
 resource "google_sql_database_instance" "postgres" {
-  name             = "postgres-instance-designmatch1"
+  name             = "postgres-instance-designmatch12"
   database_version = "POSTGRES_12"
 
   settings {
