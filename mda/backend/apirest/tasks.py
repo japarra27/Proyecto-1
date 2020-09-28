@@ -76,15 +76,6 @@ def name_image(original_image, author, im_height=800, im_width=600):
 
 @shared_task
 def conversion_design():
-
-    try:
-        os.makedirs("fileserver/designs_library/source")
-        os.makedirs("fileserver/designs_library/processing")
-        os.makedirs("fileserver/designs_library/converted")
-    except FileExistsError:
-        # directory already exists
-        pass
-
     from .models import Design
     processing_path_image = 'fileserver/designs_library/processing'
     files = [obj.name for obj in scandir(processing_path_image) if obj.is_file()]
