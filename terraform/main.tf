@@ -14,10 +14,10 @@ provider "google" {
   zone    = var.zone_gcp
 }
 
-# create the compute engine instance
-resource "google_compute_instance" "apps" {
+# create the compute engine instance MDA
+resource "google_compute_instance" "apps_mda" {
   count        = 1
-  name         = "designmatch-apps-${count.index + 1}"
+  name         = "designmatch-apps-mda-${count.index + 1}"
   machine_type = "f1-micro"
   zone         = var.zone_gcp
 
@@ -41,7 +41,34 @@ resource "google_compute_instance" "apps" {
   tags = ["http-server", "https-server"]
 }
 
-# allow traffic
+# create the compute engine instance MDB
+resource "google_compute_instance" "apps_mdb" {
+  count        = 3
+  name         = "designmatch-apps-mdb-${count.index + 1}"
+  machine_type = "f1-micro"
+  zone         = var.zone_gcp
+
+  boot_disk {
+    initialize_params {
+      image = "ubuntu-1804-bionic-v20200908"
+    }
+  }
+
+  # metadata_startup_script = file("../install_python.sh")
+
+  network_interface {
+    network = "default"
+
+    access_config {
+      // Include this section to give the VM an external ip address
+    }
+  }
+
+  // Apply the firewall rule to allow external IPs to access this instance
+  tags = ["http-server", "https-server"]
+}
+
+# allow traffic for MDA & MDB - http
 resource "google_compute_firewall" "http-server" {
   name    = "default-allow-http"
   network = "default"
@@ -56,7 +83,7 @@ resource "google_compute_firewall" "http-server" {
   target_tags   = ["http-server"]
 }
 
-# allow traffic
+# allow traffic for MDA & MDB - https
 resource "google_compute_firewall" "https-server" {
   name    = "default-allow-https"
   network = "default"
@@ -71,9 +98,9 @@ resource "google_compute_firewall" "https-server" {
   target_tags   = ["https-server"]
 }
 
-
-resource "google_sql_database_instance" "postgres" {
-  name             = "postgres-instance-designmatch12"
+# Database configuration MDA
+resource "google_sql_database_instance" "postgres_mda" {
+  name             = "postgres-instance-designmatch-mda"
   database_version = "POSTGRES_12"
 
   settings {
@@ -82,7 +109,7 @@ resource "google_sql_database_instance" "postgres" {
     ip_configuration {
 
       dynamic "authorized_networks" {
-        for_each = google_compute_instance.apps
+        for_each = google_compute_instance.apps_mda
         iterator = apps
 
         content {
@@ -94,8 +121,38 @@ resource "google_sql_database_instance" "postgres" {
   }
 }
 
-resource "google_sql_user" "users" {
+resource "google_sql_user" "users_mda" {
   name     = "designmatchadmin"
-  instance = google_sql_database_instance.postgres.name
+  instance = google_sql_database_instance.postgres_mda.name
+  password = var.password
+}
+
+
+# Database for multiple instances
+resource "google_sql_database_instance" "postgres_mdb" {
+  name             = "postgres-instance-designmatch-mdb"
+  database_version = "POSTGRES_12"
+
+  settings {
+    tier = "db-f1-micro"
+
+    ip_configuration {
+
+      dynamic "authorized_networks" {
+        for_each = google_compute_instance.apps_mdb
+        iterator = apps
+
+        content {
+          name  = apps.value.name
+          value = apps.value.network_interface.0.access_config.0.nat_ip
+        }
+      }
+    }
+  }
+}
+
+resource "google_sql_user" "users_mdb" {
+  name     = "designmatchadmin"
+  instance = google_sql_database_instance.postgres_mdb.name
   password = var.password
 }
