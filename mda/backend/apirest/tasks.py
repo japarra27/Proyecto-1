@@ -18,7 +18,7 @@ TEMPLATE_ID = 'd-8067cc3354b54074839ec5ed1d84903f'
 
 # Function to send emails
 
-sg = sendgrid.SendGridAPIClient('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')
+sg = sendgrid.SendGridAPIClient("your apikey")
 message = sendgrid.Mail()
 
 def SendDynamic():
@@ -75,6 +75,15 @@ def name_image(original_image, author, im_height=800, im_width=600):
 
 @shared_task
 def conversion_design():
+
+    try:
+        os.makedirs("fileserver/designs_library/source")
+        os.makedirs("fileserver/designs_library/processing")
+        os.makedirs("fileserver/designs_library/converted")
+    except FileExistsError:
+        # directory already exists
+        pass
+
     from .models import Design
     processing_path_image = 'fileserver/designs_library/processing'
     files = [obj.name for obj in scandir(processing_path_image) if obj.is_file()]

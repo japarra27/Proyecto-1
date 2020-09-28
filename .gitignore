@@ -140,4 +140,6 @@ dmypy.json
 .env
 
 # Keys
-gcpdatascientist-keys.jsonsendgrid.env
+gcpdatascientist-keys.json
+sendgrid.env
+./sendgrid.env
