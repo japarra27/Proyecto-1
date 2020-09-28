@@ -26,6 +26,5 @@ sudo apt install -y nodejs
 sudo apt install -y npm
 sudo apt install -y build-essential
 
-# move folders
-# sudo mv Proyecto-1/ ~
-# sudo mv venv/ ~
+# Configure nfs
+sudo apt install -y nfs-kernel-server

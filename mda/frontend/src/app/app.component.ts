@@ -8,7 +8,7 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  apiHost: string = environment.apiHost;
+  apiHost: string = environment.urlBaseServicio;
   public general: boolean;
   public login: boolean = true;
   title = 'lbPeriferiaAngular10';

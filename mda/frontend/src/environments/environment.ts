@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: "https://127.0.0.1:8080"
+  urlBaseServicio: "http://127.0.0.1:8080"
 }
 
 /*
