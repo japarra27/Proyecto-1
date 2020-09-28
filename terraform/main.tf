@@ -43,7 +43,7 @@ resource "google_compute_instance" "apps_mda" {
 
 # create the compute engine instance MDB
 resource "google_compute_instance" "apps_mdb" {
-  count        = 3
+  count        = 4
   name         = "designmatch-apps-mdb-${count.index + 1}"
   machine_type = "f1-micro"
   zone         = var.zone_gcp
@@ -121,14 +121,18 @@ resource "google_sql_database_instance" "postgres_mda" {
   }
 }
 
+resource "google_sql_database" "database_mda" {
+  name     = "designmatch-mda"
+  instance = google_sql_database_instance.postgres_mda.name
+}
+
 resource "google_sql_user" "users_mda" {
   name     = "designmatchadmin"
   instance = google_sql_database_instance.postgres_mda.name
   password = var.password
 }
 
-
-# Database for multiple instances
+# Database configuration MDB
 resource "google_sql_database_instance" "postgres_mdb" {
   name             = "postgres-instance-designmatch-mdb"
   database_version = "POSTGRES_12"
@@ -149,6 +153,12 @@ resource "google_sql_database_instance" "postgres_mdb" {
       }
     }
   }
+}
+
+
+resource "google_sql_database" "database_mdb" {
+  name     = "designmatch-mdb"
+  instance = google_sql_database_instance.postgres_mdb.name
 }
 
 resource "google_sql_user" "users_mdb" {

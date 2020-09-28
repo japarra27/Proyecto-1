@@ -1,0 +1,52 @@
+[
+  {
+    "displayName": "DevFestFL",
+    "iconName": "recent_actors",
+    "route": "devfestfl",
+    "children": [
+      {
+        "displayName": "Speakers",
+        "iconName": "group",
+        "route": "devfestfl/speakers",
+        "children": [ ]
+      },
+      {
+        "displayName": "Sessions",
+        "iconName": "speaker_notes",
+        "route": "devfestfl/sessions",
+        "children": [ ]
+      },
+      {
+        "displayName": "Feedback",
+        "iconName": "feedback",
+        "route": "devfestfl/feedback"
+      }
+    ]
+  },
+
+  {
+    "displayName": "Prueba 2",
+    "iconName": "recent_actors",
+    "route": "devfestfl",
+    "children": [
+      {
+        "displayName": "Speakers",
+        "iconName": "group",
+        "route": "devfestfl/speakers",
+        "children": [ ]
+      },
+      {
+        "displayName": "Sessions",
+        "iconName": "speaker_notes",
+        "route": "devfestfl/sessions",
+        "children": [ ]
+      },
+      {
+        "displayName": "Feedback",
+        "iconName": "feedback",
+        "route": "devfestfl/feedback"
+      }
+    ]
+  }
+
+]

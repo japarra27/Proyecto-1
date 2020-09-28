@@ -1,0 +1,30 @@
+<div class="container">
+    <h2 mat-dialog-title>{{description}}</h2>
+    <mat-dialog-content [formGroup]="formActualizar" (ngSubmit)="updateSubmit()" name="formActualizar" id="formActualizar" autocomplete="off" class="mat-container-update">
+        <!-- <div> -->
+
+        <div class="form">
+            <mat-form-field color="accent" appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input matInput class="form-control" id="name" name="name" #name formControlName="name" required>
+                <small *ngIf=""></small>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field color="accent" appearance="outline">
+                <mat-label>Descripcción</mat-label>
+                <input matInput class="form-control" id="descripccion" name="descripccion" #descripccion formControlName="descripccion" required>
+            </mat-form-field>
+        </div>
+        <div class="form">
+            <mat-form-field color="accent" appearance="outline">
+                <mat-label>Precio</mat-label>
+                <input matInput type="text" class="form-control" #precio formControlName="precio" id="precio" name="precio" required>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <td mat-dialog-actions class="actions-update">
+        <button mat-button mat-dialog-close (click)="cerrar()">Cerrar</button>
+        <button mat-button cdkFocusInitial type="submit" (click)="actualizarUsuario()">Guardar</button>
+    </td>
+</div>

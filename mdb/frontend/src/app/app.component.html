@@ -1,0 +1,17 @@
+
+<app-main *ngIf="general" (cierreSesion)="eventoSesion($event)" >
+
+
+
+    <router-outlet *ngIf="general"></router-outlet>
+
+</app-main>
+
+
+
+
+
+<app-login *ngIf="login" (eventoSesion)="eventoSesion($event)" ><app-login>
+
+
+

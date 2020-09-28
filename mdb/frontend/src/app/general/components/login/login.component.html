@@ -1,0 +1,207 @@
+<body *ngIf="login">
+  <div class="login-wrapper">
+    <mat-card class="box">
+      <mat-card-header>
+        <mat-card-title>Iniciar sesión</mat-card-title>
+      </mat-card-header>
+
+      <form [formGroup]="frmSesion" (ngSubmit)="iniciarSesion()">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              placeholder="Usuario"
+              maxlength="50"
+              name="nombre"
+              id="nombre"
+              matInput
+            />
+
+            <mat-error
+              *ngIf="frmSesion.get('username').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmSesion.get('username').errors?.minlength"
+              class="invalid-tooltip"
+            >
+              Minimo 6 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              maxlength="50"
+              name="contrasenia"
+              placeholder="Contraseña"
+              id="contasenia"
+              matInput
+            />
+            <mat-error
+              *ngIf="frmSesion.get('password').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmSesion.get('password').errors?.minlength"
+              class="invalid-tooltip"
+            >
+              Minimo 6 caracteres
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              maxlength="50"
+              name="Email"
+              placeholder="Email"
+              id="Email"
+              matInput
+            />
+            <mat-error
+              *ngIf="frmSesion.get('email').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmSesion.get('email').errors?.email"
+              class="invalid-tooltip"
+            >
+              Formato invalido
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <button
+          mat-raised-button
+          color="accent"
+          class="btn-block"
+          [disabled]="!frmSesion.valid"
+        >
+          Ingresar
+        </button>
+
+        <button
+          mat-raised-button
+          color="accent"
+          class="btn-block"
+          (click)="botonCrearEmpresa()"
+        >
+          Crear empresa
+        </button>
+      </form>
+    </mat-card>
+  </div>
+</body>
+<!-- -------------- empresa crear -------------------------- -->
+
+<body *ngIf="empresaCrear">
+  <div class="login-wrapper">
+    <mat-card class="box">
+
+      <mat-card-header>
+        <mat-card-title>Crear empresa</mat-card-title>
+      </mat-card-header>
+
+      <form [formGroup]="frmEmpresas" (ngSubmit)="crearEmpresa()">
+        <mat-card-content>
+          <mat-form-field class="example-full-width">
+            <input
+              type="text"
+              formControlName="username"
+              class="form-control"
+              placeholder="Usuario"
+              maxlength="50"
+              name="nombre"
+              id="nombre"
+              matInput
+            />
+
+            <mat-error
+              *ngIf="frmEmpresas.get('username').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmEmpresas.get('username').errors?.minlength"
+              class="invalid-tooltip"
+            >
+              Minimo 6 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input
+              type="password"
+              formControlName="password"
+              class="form-control"
+              maxlength="50"
+              name="contrasenia"
+              placeholder="Contraseña"
+              id="contasenia"
+              matInput
+            />
+            <mat-error
+              *ngIf="frmEmpresas.get('password').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmEmpresas.get('password').errors?.minlength"
+              class="invalid-tooltip"
+            >
+              Minimo 6 caracteres
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              maxlength="50"
+              name="Email"
+              placeholder="Email"
+              id="Email"
+              matInput
+            />
+            <mat-error
+              *ngIf="frmEmpresas.get('email').errors?.required"
+              class="invalid-tooltip"
+            >
+              Campo obligatorio
+            </mat-error>
+            <mat-error
+              *ngIf="frmEmpresas.get('email').errors?.email"
+              class="invalid-tooltip"
+            >
+              Formato invalido
+            </mat-error>
+          </mat-form-field>
+        </mat-card-content>
+        <button
+          mat-raised-button
+          color="warn"
+          class="btn-block"
+          [disabled]="!frmEmpresas.valid"
+
+        >
+          Crear empresa
+        </button>
+
+
+      </form>
+    </mat-card>
+  </div>
+</body>
