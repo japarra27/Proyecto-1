@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  urlBaseServicio : "http://34.74.8.228:8080"
-};
+  apiHost: "https://127.0.0.1:8080"
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
