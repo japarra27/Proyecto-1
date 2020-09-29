@@ -14,6 +14,18 @@ provider "google" {
   zone    = var.zone_gcp
 }
 
+
+# Compute address - static_ip - MDA
+resource "google_compute_address" "static_mda" {
+  name = "ipv4-address-static-ip-mda"
+}
+
+# Compute address - static_ip - MDB
+resource "google_compute_address" "static_mdb" {
+  count = var.node_count
+  name = "ipv4-address-static-ip-mdb-${count.index + 1}"
+}
+
 # create the compute engine instance MDA
 resource "google_compute_instance" "apps_mda" {
   count        = 1
@@ -33,7 +45,7 @@ resource "google_compute_instance" "apps_mda" {
     network = "default"
 
     access_config {
-      // Include this section to give the VM an external ip address
+      nat_ip = google_compute_address.static_mda.address
     }
   }
 
@@ -43,7 +55,7 @@ resource "google_compute_instance" "apps_mda" {
 
 # create the compute engine instance MDB
 resource "google_compute_instance" "apps_mdb" {
-  count        = 4
+  count        = var.node_count
   name         = "designmatch-apps-mdb-${count.index + 1}"
   machine_type = "f1-micro"
   zone         = var.zone_gcp
@@ -60,7 +72,7 @@ resource "google_compute_instance" "apps_mdb" {
     network = "default"
 
     access_config {
-      // Include this section to give the VM an external ip address
+      nat_ip = "${element(google_compute_address.static_mdb.*.address, count.index)}"
     }
   }
 
@@ -75,7 +87,7 @@ resource "google_compute_firewall" "http-server" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8000", "8080", "22", "443"]
+    ports    = ["80", "8000", "8080", "22", "443", "2049", "111"]
   }
 
   // Allow traffic from everywhere to instances with an http-server tag
@@ -90,7 +102,7 @@ resource "google_compute_firewall" "https-server" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8000", "8080", "22", "443"]
+    ports    = ["80", "8000", "8080", "22", "443", "2049", "111"]
   }
 
   // Allow traffic from everywhere to instances with an http-server tag

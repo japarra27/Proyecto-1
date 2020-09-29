@@ -26,6 +26,3 @@ sudo apt install -y nodejs
 sudo apt install -y npm
 npm install tslib
 sudo apt install -y build-essential
-
-# Configure nfs
-sudo apt install -y nfs-kernel-server

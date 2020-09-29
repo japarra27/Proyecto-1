@@ -28,3 +28,9 @@ variable "password" {
   type        = string
   default     = "designmatchp4ssw0rd"
 }
+
+# Cantidad de instancias a crear
+variable "node_count" {
+ type    = number
+ default = 4
+}
