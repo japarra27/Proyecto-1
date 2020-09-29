@@ -10,6 +10,8 @@ import { DiseñoComponent } from './general/components/diseños/diseño.componen
 import { CrearProyectoComponent } from './general/components/crear-proyecto/crear-proyecto.component';
 import { CrearDiseñoComponent } from './general/components/crear-diseño/crear-diseño.component';
 
+
+
 //#endregion Componentes
 
 const routes: Routes = [
@@ -31,7 +33,6 @@ const routes: Routes = [
     component: CrearProyectoComponent
   },
 
-
   {
     path: 'home',
     component: HomeComponent,
@@ -39,7 +40,7 @@ const routes: Routes = [
 
   {
     path: '',
-    redirectTo: '/login',
+    redirectTo: '/home',
     pathMatch: 'full',
   },
 
