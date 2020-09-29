@@ -59,6 +59,15 @@ export class DiseñoService {
     const url = `${environment.urlBaseServicio}/api/projects/2/designs/${id}/`;
     return this.httpClient.delete(url, { headers: httpOptions });
   }
+
+  // eliminarDiseño(id: string) {
+  //   debugger;
+  //   const authorization = localStorage.getItem('Authorization');
+  //   const httpOptions = new HttpHeaders().append('authorization', `${authorization}`);
+  //   const url = `${environment.urlBaseServicio}/api/projects/${diseño.design_project}/designs/${id}/`;
+  //   return this.httpClient.delete(url, { headers: httpOptions });
+  // }
+
   // tslint:disable-next-line: typedef
   getDialogData() {
     return this.dialogData;
