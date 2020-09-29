@@ -7,42 +7,13 @@ from PIL import Image, ImageDraw, ImageFont
 import datetime
 from django.core.mail import send_mail
 from django.conf import settings
-from sendgrid.helpers.mail import Mail
-from sendgrid import SendGridAPIClient
+from helpers import emails
 
-
-# Define send email
-FROM_EMAIL = 'Your_Name@SendGridTest.com'
-TEMPLATE_ID = 'd-8067cc3354b54074839ec5ed1d84903f'
-
-# Function to send emails
-def SendDynamic():
-    TO_EMAILS = [design.designer_email, settings.EMAIL_HOST_USER]
-    message = Mail(
-        from_email=FROM_EMAIL,
-        to_emails=TO_EMAILS)
-
-    # pass custom values for our HTML placeholders
-    message.dynamic_template_data = {
-        'subject': 'Carga del Diseño',
-    }
-    message.template_id = TEMPLATE_ID
-    try:
-        sg = SendGridAPIClient(settings.EMAIL_HOST_PASSWORD)
-        response = sg.send(message)
-        code, body, headers = response.status_code, response.body, response.headers
-        print(f"Response code: {code}")
-        print(f"Response headers: {headers}")
-        print(f"Response body: {body}")
-        print("Dynamic Messages Sent!")
-    except Exception as e:
-        print("Error: {0}".format(e))
-    return str(response.status_code)
 
 # Function to convert images
 def name_image(original_image, author, im_height=800, im_width=600):
-    converted_path_image = '~/fileserver/designs_library/converted'
-    source_path_image = '~/fileserver/designs_library/source/'
+    converted_path_image = '/mnt/fileserver/designs_library/converted'
+    source_path_image = '/mnt/fileserver/designs_library/source/'
     image = Image.open(original_image)
     image = image.resize((im_height, im_width))
     image_name = original_image.split("/")[-1]
@@ -68,10 +39,11 @@ def name_image(original_image, author, im_height=800, im_width=600):
     print(image_name)
     return image.save(converted_path_image + f'/{image_name}', format="PNG")
 
+
 @shared_task
 def conversion_design():
     from .models import Design
-    processing_path_image = '~/fileserver/designs_library/processing'
+    processing_path_image = '/mnt/fileserver/designs_library/processing'
     files = [obj.name for obj in scandir(processing_path_image) if obj.is_file()]
 
     try:
@@ -85,20 +57,11 @@ def conversion_design():
                 design = Design.objects.get( design_file = processing_path_image + '/' + file )
                 print(design)
                 name_image(processing_path_image + "/" + file, design.designer_first_name)
-                #name_image(f'~/fileserver/designs_library/processing/{file}', design.designer_first_name)
                 print('Conversión completada')
                 design.design_status = 'CONVERTED'
                 design.save()
-                print ('Funcionó')
-                # Envia Correo
-                #subject = "Carga del Diseño"
-                #message = "El diseño ya ha sido publicado en la página pública del administrador."
-                #from_email = settings.EMAIL_HOST_USER
-                #to_list = [design.designer_email, settings.EMAIL_HOST_USER]
-                #send_mail(subject, message, from_email, to_list, fail_silently=True)
-                SendDynamic()
+                emails.sendEmail(designer_email=pending_design.designer_email, designer_name=design.designer_first_name)
                 print ("\n *** Diseño: {} Convertido! ***\n".format(file))
-                print(response.status_code)
             response = "Diseños Convertidos!"
 
         else:

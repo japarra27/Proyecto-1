@@ -2,13 +2,11 @@
 variable "credentials_file" {
   description = "Name of the credentials file"
   type        = string
-  default     = ".terraform/dsc-projects.json"
 }
 
 variable "project_gcp" {
   description = "Name of the GCP project"
   type        = string
-  default     = "gcpdatascientist"
 }
 
 variable "region_gcp" {
@@ -26,5 +24,10 @@ variable "zone_gcp" {
 variable "password" {
   description = "Postgresql password database"
   type        = string
-  default     = "designmatchp4ssw0rd"
+}
+
+# Cantidad de instancias a crear
+variable "node_count" {
+ type    = number
+ default = 4
 }

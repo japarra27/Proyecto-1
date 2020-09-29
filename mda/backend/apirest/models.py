@@ -6,6 +6,8 @@ from django.db import models
 import os
 import uuid
 
+
+# class project
 class Project(models.Model):
     project_name = models.CharField(max_length=50, verbose_name = "Nombre del Evento")
     project_description = models.CharField(max_length=250, verbose_name = "Descripción del Proyecto  ")
@@ -15,6 +17,8 @@ class Project(models.Model):
     def __str__(self):
         return self.project_name
 
+
+# class design
 class Design(models.Model):
     def path_and_rename(instance, filename):
         upload_to = "fileserver/designs_library/processing"
