@@ -25,28 +25,28 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'q7_o*5&q2(fr3eo_7$ttas7v+d@$&gm0%-az6!wp3$yp!80w(x'
+SECRET_KEY = os.getenv("DJANGO_PASSWORD")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+CORS_ORIGIN_ALLOW_ALL = True
 
-# AUTH_USER_MODEL = 'apirest.Company'
-# Application definition
 
-CELERY_BROKER_URL='redis://localhost:6379/0'
+# CELERY CONFIGURATION
+CELERY_BROKER_URL= os.getenv("DJANGO_BROKER_URL_MDA")
 CELERY_TIMEZONE = 'America/Bogota'
 
 CELERY_BEAT_SCHEDULE = {
     "conversion_design": {
         "task": "apirest.tasks.conversion_design",
-        #"schedule": crontab( minute = "*/1"),
         "schedule": 1.0,
     },
 }
 
 
+# INSTALLED DJANGO APPS
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,8 +60,6 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'corsheaders',
 ]
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
@@ -110,11 +108,11 @@ WSGI_APPLICATION = 'DesignMatch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'designmatch-mdb', 
-        'USER': 'designmatchadmin', 
-        'PASSWORD': 'designmatchp4ssw0rd',
-        'HOST': '35.243.199.102', 
-        'PORT': '5432',
+        'NAME': os.getenv('DB_NAME_MDA'), 
+        'USER': os.getenv('DB_USER_MDA'), 
+        'PASSWORD': os.getenv('DB_PASSWORD_MDA'),
+        'HOST': os.getenv('DB_HOST_MDA'), 
+        'PORT': os.getenv('DB_PORT_MDA'),
     }
 }
 
@@ -138,12 +136,13 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # Enviar correos electronicos:
-EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = 'apikey'
-EMAIL_PORT = 587
+EMAIL_BACKEND = 'sendgrid_backend.SendgridBackend'
 EMAIL_USE_TLS = True
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = os.getenv("SENDGRID_HOST")
+EMAIL_HOST_USER = os.getenv("SENDGRID_USER")
+EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_PASSWORD")
+EMAIL_PORT = os.getenv("SENDGRID_PORT")
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
