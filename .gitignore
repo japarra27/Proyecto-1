@@ -188,3 +188,9 @@ testem.log
 
 # System Files
 .DS_Store
+/mda/backend/celerybeat-schedule.dat
+/mda/backend/celerybeat-schedule.bak
+/mda/backend/celerybeat-schedule.dir
+/mdb/backend/celerybeat-schedule.dat
+/mdb/backend/celerybeat-schedule.bak
+/mdb/backend/celerybeat-schedule.dir
