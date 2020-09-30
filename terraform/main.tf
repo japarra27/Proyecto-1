@@ -30,8 +30,9 @@ resource "google_compute_address" "static_mdb" {
 resource "google_compute_instance" "apps_mda" {
   count        = 1
   name         = "designmatch-apps-mda-${count.index + 1}"
-  machine_type = "f1-micro"
+  machine_type = "n2-standard-4"
   zone         = var.zone_gcp
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
