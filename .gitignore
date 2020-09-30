@@ -194,3 +194,4 @@ testem.log
 /mdb/backend/celerybeat-schedule.dat
 /mdb/backend/celerybeat-schedule.bak
 /mdb/backend/celerybeat-schedule.dir
+mda/backend/celerybeat-schedule.dat

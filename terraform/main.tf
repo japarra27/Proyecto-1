@@ -39,7 +39,7 @@ resource "google_compute_instance" "apps_mda" {
     }
   }
 
-  # metadata_startup_script = file("../install_python.sh")
+  metadata_startup_script = "curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update && sudo apt-get install stackdriver-agent && sudo service stackdriver-agent start"
 
   network_interface {
     network = "default"
@@ -66,7 +66,7 @@ resource "google_compute_instance" "apps_mdb" {
     }
   }
 
-  # metadata_startup_script = file("../install_python.sh")
+  # metadata_startup_script = "curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update && sudo apt-get install stackdriver-agent && sudo service stackdriver-agent start"
 
   network_interface {
     network = "default"
