@@ -58,7 +58,7 @@ resource "google_compute_instance" "apps_mda" {
 resource "google_compute_instance" "apps_mdb" {
   count        = var.node_count
   name         = "designmatch-apps-mdb-${count.index + 1}"
-  machine_type = "f1-micro"
+  machine_type = "g1-small"
   zone         = var.zone_gcp
 
   boot_disk {
@@ -67,6 +67,7 @@ resource "google_compute_instance" "apps_mdb" {
     }
   }
 
+  allow_stopping_for_update = true
   # metadata_startup_script = "curl -sSO https://dl.google.com/cloudagents/add-monitoring-agent-repo.sh && sudo bash add-monitoring-agent-repo.sh && sudo apt-get update && sudo apt-get install stackdriver-agent && sudo service stackdriver-agent start"
 
   network_interface {
@@ -88,7 +89,7 @@ resource "google_compute_firewall" "http-server" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8000", "8080", "22", "443", "2049", "111", "6379"]
+    ports    = ["80", "8000", "8080", "22", "443", "2049", "111", "6379", "4200"]
   }
 
   // Allow traffic from everywhere to instances with an http-server tag
@@ -103,7 +104,7 @@ resource "google_compute_firewall" "https-server" {
 
   allow {
     protocol = "tcp"
-    ports    = ["80", "8000", "8080", "22", "443", "2049", "111", "6379"]
+    ports    = ["80", "8000", "8080", "22", "443", "2049", "111", "6379", "4200"]
   }
 
   // Allow traffic from everywhere to instances with an http-server tag

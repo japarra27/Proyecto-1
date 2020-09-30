@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  urlBaseServicio: "http://127.0.0.1:8080"
+  urlBaseServicio: "http://0.0.0.0:8080"
 };
