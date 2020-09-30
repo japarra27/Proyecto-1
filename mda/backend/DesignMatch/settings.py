@@ -28,7 +28,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.getenv("DJANGO_PASSWORD")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
@@ -111,7 +111,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME_MDA'), 
         'USER': os.getenv('DB_USER_MDA'), 
         'PASSWORD': os.getenv('DB_PASSWORD_MDA'),
-        'HOST': os.getenv('DB_HOST_MDA'), 
+        'HOST': os.getenv('IP_DATABASE_MDA'), 
         'PORT': os.getenv('DB_PORT_MDA'),
     }
 }

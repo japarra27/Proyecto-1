@@ -44,7 +44,7 @@ def name_image(original_image, author, im_height=800, im_width=600):
 @shared_task
 def conversion_design():
     from .models import Design
-    processing_path_image = '/mnt/fileserver/designs_library/processing'
+    processing_path_image = 'fileserver/designs_library/processing'
     files = [obj.name for obj in scandir(processing_path_image) if obj.is_file()]
 
     try:

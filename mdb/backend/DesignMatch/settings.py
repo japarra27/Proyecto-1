@@ -122,7 +122,7 @@ DATABASES = {
         'NAME': os.getenv('DB_NAME_MDB'), 
         'USER': os.getenv('DB_USER_MDB'), 
         'PASSWORD': os.getenv('DB_PASSWORD_MDB'),
-        'HOST': os.getenv('DB_HOST_MDB'), 
+        'HOST': os.getenv('IP_DATABASE_MDB'), 
         'PORT': os.getenv('DB_PORT_MDB'),
     }
 }

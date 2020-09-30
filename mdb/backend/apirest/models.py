@@ -21,7 +21,7 @@ class Project(models.Model):
 # class design
 class Design(models.Model):
     def path_and_rename(instance, filename):
-        upload_to = "fileserver/designs_library/processing"
+        upload_to = "/mnt/fileserver/designs_library/processing"
         ext = filename.split('.')[-1]
         if instance.pk:
             filename = '{}'.format(instance.pk)
