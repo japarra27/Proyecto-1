@@ -29,6 +29,7 @@ SECRET_KEY = os.getenv("DJANGO_PASSWORD")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 CORS_ORIGIN_ALLOW_ALL = True
@@ -153,7 +154,7 @@ EMAIL_HOST = os.getenv("SENDGRID_HOST")
 EMAIL_HOST_USER = os.getenv("SENDGRID_USER")
 EMAIL_HOST_PASSWORD = os.getenv("SENDGRID_PASSWORD")
 EMAIL_PORT = os.getenv("SENDGRID_PORT")
-
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
