@@ -13,7 +13,7 @@ def sendEmail(designer_email, designer_name):
     ya se encuentra disponible.
     Feliz día.'''.format(designer_name)
 
- #   message.template_id = TEMPLATE_ID
+   message.template_id = TEMPLATE_ID
 
     sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
     from_email = Email(os.getenv(FROM_EMAIL))
