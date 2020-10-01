@@ -15,8 +15,9 @@ export class AppComponent {
   empresa: string;
 
   constructor(private router: Router) {
-    this.general = false;
-    this.eventoSesion();
+    this.general = true;
+    // this.general = false;
+    // this.eventoSesion();
   }
 
   eventoSesion() {
