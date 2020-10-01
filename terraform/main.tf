@@ -58,7 +58,7 @@ resource "google_compute_instance" "apps_mda" {
 resource "google_compute_instance" "apps_mdb" {
   count        = var.node_count
   name         = "designmatch-apps-mdb-${count.index + 1}"
-  machine_type = "g1-small"
+  machine_type = "n2-standard-2"
   zone         = var.zone_gcp
 
   boot_disk {
@@ -74,7 +74,7 @@ resource "google_compute_instance" "apps_mdb" {
     network = "default"
 
     access_config {
-      nat_ip = "${element(google_compute_address.static_mdb.*.address, count.index)}"
+      nat_ip = element(google_compute_address.static_mdb.*.address, count.index)
     }
   }
 
