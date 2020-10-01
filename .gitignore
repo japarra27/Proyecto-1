@@ -111,6 +111,7 @@ env.bak/
 venv.bak/
 django-app/
 vm_conn/
+mdb/frontend_old
 
 # Spyder project settings
 .spyderproject

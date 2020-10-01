@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +8,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  apiHost: string = environment.urlBaseServicio;
   public general: boolean;
   public login: boolean = true;
   title = 'lbPeriferiaAngular10';
   empresa: string;
 
   constructor(private router: Router) {
-    this.general = false;
-    this.eventoSesion();
+    this.general = true;
+    // this.general = false;
+    // this.eventoSesion();
   }
 
   eventoSesion() {

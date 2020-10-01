@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import { LoginModel } from '../../models/general/login';
 import 'rxjs/add/observable/throw';
 import { environment } from './../../../environments/environment';
+//import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,4 @@ export class LoginService {
     const url = `${environment.urlBaseServicio}/api/create-company/`;
     return this.http.post<LoginModel>(url, body);
   }
-
-
 }
